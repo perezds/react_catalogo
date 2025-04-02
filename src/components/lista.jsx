@@ -14,7 +14,7 @@ import estilos from './lista.module.css';
 const API_key = 'af26cce282aecf5c6cc39a264f29d0a7';
 const API_URL = 'https://api.themoviedb.org/3';
  
-export function Lista(){
+export default function Lista(){
     const [movies, setMovies] = useState([]);
  
     useEffect(() => {
