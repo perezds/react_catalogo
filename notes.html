@@ -1,0 +1,19 @@
+import estilos from '.App.module.css';
+
+//todo elemento deve estar dentro da function
+function App(){
+  return(
+    // tags fantasmas: tags vazias a ponto de permitir a 
+    // renderização de 2 ou mais elementos HTML
+    //  no mesmo componente
+    <>
+    <h1 className={estilos.titulo}>DS 13</h1>
+    <h3 className={estilos.subtitulo}>Vocês são demais</h3>
+    </>
+  )
+}
+
+// para que a função seja chamada
+//  em outros elementos devemos "exporta-las"
+
+export default App

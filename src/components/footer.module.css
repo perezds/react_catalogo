@@ -1,0 +1,51 @@
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.socialIcons a {
+  color: #fff;
+  font-size: 24px;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.socialIcons a:hover {
+  color: #0077b5; 
+  opacity: 1;
+}
+
+/* Se precisar de cores diferentes para ícones específicos */
+.socialIcons a:nth-child(2):hover {
+  color: #1DA1F2; /* Azul do Twitter, por exemplo */
+}
+
+.footerBottom {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.footerLink {
+  color: #0077b5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
