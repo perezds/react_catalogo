@@ -3,3 +3,43 @@
   padding:0px;
   box-sizing: border-box;
 }
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --card-bg: #f3f3f3;
+  --icon-color: #555;
+  --icon-hover: black;
+}
+
+body.dark {
+  --bg-color: #1e1e1e;
+  --text-color: #f1f1f1;
+  --card-bg: #2a2a2a;
+  --icon-color: #ccc;
+  --icon-hover: white;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, color 0.3s; /* Para uma transição suave */
+}
+
+button {
+  background-color: lightgray;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+body.dark {
+  background-color: #333;
+  color: rgb(0, 0, 0);
+}
+
+button.dark {
+  background-color: #555;
+  color: white;
+}

@@ -1,43 +1,31 @@
-//requisição http(s) é feita usando o axios
-import axios from "axios";
+import Carrossel from './carrossel';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-//hook: são os auxilios q tenho para deixar minha programação mais robusta, confiavel e flexivel
-//useState controla o estado atual da minha variavel
-//useEffect manipula a visualização do componente em tela
-import React, {useState, useEffect} from "react";
+export default function Home() {
+  const [populares, setPopulares] = useState([]);
+  const [acao, setAcao] = useState([]);
+  const [romance, setRomance] = useState([]);
 
-//importo o componente card
-import Card from "./Card";
-import estilos from './lista.module.css';
- 
-//preciso de um endereço e uma chave para fazer a comunicação dele com a API  
-const API_key = 'af26cce282aecf5c6cc39a264f29d0a7';
-const API_URL = 'https://api.themoviedb.org/3';
- 
-export default function Lista(){
-    const [movies, setMovies] = useState([]);
- 
-    useEffect(() => {
-        axios.get(`${API_URL}/movie/popular?api_key=${API_key}&language=pt-BR`)
-          .then(response => {
-            console.log(response.data.results);
-            setMovies(response.data.results);
-          })
-          .catch(error => {
-            console.log('Error', error);
-          });
-      }, []);
- 
-    return(
-      <div className={estilos.conteiner}>
-        <figure style={{display: 'flex', flexWrap: 'wrap'}}>
-          {movies.map(movie=>(
-            <Card key={movie.id} movie={movie}/>
-          ))}
- 
-        </figure>
-       
-      </div>
-    ); 
+  const API_KEY = '10d4638f572605fe3f2131925ba167a0';
+  const base = 'https://api.themoviedb.org/3';
+
+  useEffect(() => {
+    axios.get(`${base}/movie/popular?api_key=${API_KEY}&language=pt-BR`)
+      .then(res => setPopulares(res.data.results));
+
+    axios.get(`${base}/discover/movie?api_key=${API_KEY}&with_genres=28&language=pt-BR`)
+      .then(res => setAcao(res.data.results));
+
+    axios.get(`${base}/discover/movie?api_key=${API_KEY}&with_genres=10749&language=pt-BR`)
+      .then(res => setRomance(res.data.results));
+  }, []);
+
+  return (
+    <div>
+      <Carrossel title="Em Alta" movies={populares} />
+      <Carrossel title="Ação" movies={acao} />
+      <Carrossel title="Romance" movies={romance} />
+    </div>
+  );
 }
- 

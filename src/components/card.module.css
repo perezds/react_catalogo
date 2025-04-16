@@ -1,14 +1,47 @@
-.container {
-    position: relative;
-    width: 280px;
-    margin: 10px 30px 10px 30px; /* Mantendo margem uniforme */
-    overflow: hidden;
-    border-radius: 5px;
-    background-color: #27548A;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.titulo {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin-bottom: 5px;
+  text-align: center;
+  word-break: break-word;
 }
 
-.container:hover {
-    transform: scale(1.05); /* Efeito de leve crescimento ao passar o mouse */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para realce */
+.acoes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.acoes button {
+  background: none;
+  border: none;
+  color: var(--icon-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.acoes button:hover {
+  color: var(--icon-hover);
+}
+.card {
+  flex: 0 0 auto;
+  width: 180px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  background-color: var(--card-bg);
+  transition: background-color 0.3s;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }

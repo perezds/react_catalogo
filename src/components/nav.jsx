@@ -1,22 +1,28 @@
+import { useTheme } from '../ThemeContext';
 import estilos from './nav.module.css';
+import { Link } from 'react-router-dom';
 
-export function Nav() {
+export default function Navbar() {
+  const { darkMode, setDarkMode } = useTheme();
+
   return (
-    <nav className={estilos.container}>
-      <ul>
-        <li>
-          <i className="fas fa-home"></i> Home
-        </li>
-        <li>
-          <i className="fas fa-film"></i> Filmes
-        </li>
-        <li>
-          <i className="fas fa-user"></i> Perfil
-        </li>
-      </ul>
-
-    </nav>
+    <header className={estilos.navbar}>
+      <div className={estilos.logo}>🎞️ DS13Flix</div>
+      <nav className={estilos.menu}>
+        <Link to="/">Início</Link>
+        <Link to="/categorias">Categorias</Link>
+        <Link to="/favoritos">Favoritos</Link>
+        <Link to="/series">Series</Link>
+        <Link to="/profile">Perfil</Link>
+        <label className={estilos.switch}>
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+          <span className={estilos.slider}></span>
+        </label>
+      </nav>
+    </header>
   );
 }
-
-export default Nav;

@@ -1,30 +1,75 @@
-.container {
-  background-color: #DDA853;
-  padding: 10px;
-}
-
-.container ul {
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
   display: flex;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  color: #27548A;
-}
-
-.container li {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  font-size: 16px;
+  padding: 0 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  color: white;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.menu a {
+  margin-left: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.container li i {
-  margin-right: 8px;
-  font-size: 20px;
+.menu a:hover {
+  color: #ffd700;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+  margin-left: 20px;
 }
 
-.container li:hover {
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
   cursor: pointer;
-  color: #007BFF;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #390fad;
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
 }
