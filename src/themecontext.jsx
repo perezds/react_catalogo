@@ -8,14 +8,13 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    // Aplicar a classe 'dark' no body ou removê-la
+ 
     if (darkMode) {
       document.body.classList.add('dark');
     } else {
       document.body.classList.remove('dark');
     }
 
-    // Salvar a preferência no localStorage
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 

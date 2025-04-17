@@ -1,52 +1,76 @@
 .overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 1001;
-}
-
-.modal {
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 2rem;
-    max-width: 700px;
-    width: 90%;
-    color: #000;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-    position: relative;
-    text-align: center;
-}
-
-.modal img {
-    width: 100%;
+    align-items: center;
+  }
+  
+  .modal {
+    background: white;
     border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.modal h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.modal p {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.modal button {
-    padding: 0.6rem 1.2rem;
-    background-color: #390fad;
+    width: 80%;
+    max-width: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .modalImage {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .textContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .modalTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .modalDescription {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 500px;
+  }
+  
+  .closeButton {
+    padding: 10px 20px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
-}
-
-.modal button:hover {
-    background-color: #be2e0a;
-}
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .closeButton:hover {
+    background-color: #0056b3;
+  }
+  

@@ -7,11 +7,9 @@ export default function Navbar() {
 
   return (
     <header className={estilos.navbar}>
-      <div className={estilos.logo}>🎞️ DS13Flix</div>
+      <div className={estilos.logo}>🎞️ MOONFilms</div>
       <nav className={estilos.menu}>
         <Link to="/">Início</Link>
-        <Link to="/categorias">Categorias</Link>
-        <Link to="/favoritos">Favoritos</Link>
         <Link to="/series">Series</Link>
         <Link to="/profile">Perfil</Link>
         <label className={estilos.switch}>

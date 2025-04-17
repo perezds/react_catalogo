@@ -1,3 +1,4 @@
+import React from 'react';
 import estilos from './modal.module.css';
 
 export default function Modal({ movie, onClose }) {
@@ -8,10 +9,20 @@ export default function Modal({ movie, onClose }) {
     return (
         <div className={estilos.overlay} onClick={onClose}>
             <div className={estilos.modal} onClick={e => e.stopPropagation()}>
-                <img src={imageURL} alt={movie.title} />
-                <h2>{movie.title}</h2>
-                <p>{movie.overview}</p>
-                <button onClick={onClose}>Fechar</button>
+                <div className={estilos.modalContent}>
+                    {imageURL && (
+                        <img 
+                            className={estilos.modalImage}
+                            src={imageURL} 
+                            alt={movie.title || movie.name} 
+                        />
+                    )}
+                    <div className={estilos.textContent}>
+                        <h2 className={estilos.modalTitle}>{movie.title || movie.name}</h2>
+                        <p className={estilos.modalDescription}>{movie.overview || 'Descrição não disponível.'}</p>
+                        <button className={estilos.closeButton} onClick={onClose}>Fechar</button>
+                    </div>
+                </div>
             </div>
         </div>
     );

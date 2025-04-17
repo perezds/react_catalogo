@@ -1,53 +1,83 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import estilos from './series.module.css'; 
+import Modal from './Modal';
+import SerieCard from './serieCard';
+import './carrossel.css';
 
 const API_KEY = 'af26cce282aecf5c6cc39a264f29d0a7';
 const API_URL = 'https://api.themoviedb.org/3';
 
 export default function Series() {
-  const [series, setSeries] = useState([]);
-  const [current, setCurrent] = useState(0);
+  const [seriesTrending, setSeriesTrending] = useState([]);
+  const [seriesRomance, setSeriesRomance] = useState([]);
+  const [seriesComedy, setSeriesComedy] = useState([]);
+  const [selectedSeries, setSelectedSeries] = useState(null);
+  const [removedSeries, setRemovedSeries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/tv/popular?api_key=${API_KEY}&language=pt-BR`)
-      .then((response) => setSeries(response.data.results))
-      .catch((error) => console.error('Erro ao buscar séries:', error));
+    const fetchSeries = async () => {
+      try {
+        const trendingResponse = await axios.get(`${API_URL}/tv/popular?api_key=${API_KEY}&language=pt-BR`);
+        const romanceResponse = await axios.get(`${API_URL}/discover/tv?api_key=${API_KEY}&language=pt-BR&with_genres=10749`); 
+        const comedyResponse = await axios.get(`${API_URL}/discover/tv?api_key=${API_KEY}&language=pt-BR&with_genres=35`); 
+
+        setSeriesTrending(trendingResponse.data.results);
+        setSeriesRomance(romanceResponse.data.results);
+        setSeriesComedy(comedyResponse.data.results);
+
+        setLoading(false);
+      } catch (err) {
+        setError('Erro ao carregar séries.');
+        setLoading(false);
+      }
+    };
+
+    fetchSeries();
   }, []);
 
-  const pularSerie = () => {
-    setCurrent((prev) => (prev + 1) % series.length);
+  const handleRemove = (id) => {
+    setRemovedSeries((prev) => [...prev, id]);
   };
 
-  const serie = series[current] || {};
-  const backgroundUrl = serie.backdrop_path || serie.poster_path;
+  const renderCarrossel = (series, title) => (
+    <>
+      <h2 className="carrossel-titulo">{title}</h2>
+      <div className="carrossel">
+        {series
+          .filter((serie) => !removedSeries.includes(serie.id))
+          .map((serie) => (
+            <SerieCard
+            key={serie.id}
+            series={serie}
+            onClick={setSelectedSeries}
+            onRemove={() => handleRemove(serie.id)}
+          />
+          ))}
+      </div>
+    </>
+  );
+
+  if (loading) {
+    return <div>Carregando séries...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
-    <main className={`${estilos.container} ${estilos.fade}`}>
-      {backgroundUrl && (
-        <div
-          className={estilos.bg}
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundUrl})`,
-          }}
-        />
-      )}
+    <>
+      {renderCarrossel(seriesTrending, 'Séries em Alta')}
+      {renderCarrossel(seriesRomance, 'Romance')}
+      {renderCarrossel(seriesComedy, 'Comédia')}
 
-      <div className={estilos.overlay}>
-        <div className={estilos.textos}>
-          <h1>{serie.name || 'Série em destaque'}</h1>
-          <p>{serie.overview || 'Confira uma série popular agora mesmo!'}</p>
-          <div className={estilos.botoes}>
-            <button className={estilos.assistir}>▶ Assistir agora</button>
-            <button className={estilos.gostei}>Gostei</button>
-            <button className={estilos.naoInteressado} onClick={pularSerie}>
-              Não interessado
-            </button>
-          </div>
-        </div>
-      </div>
-    </main>
+      <Modal
+        movie={selectedSeries}
+        onClose={() => setSelectedSeries(null)}
+        onRemove={() => handleRemove(selectedSeries?.id)}
+      />
+    </>
   );
 }
-
